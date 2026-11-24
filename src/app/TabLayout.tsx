@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import { navigationTexts } from '@/content/texts/navigation';
 import { settingsPaths } from '@/features/settings';
@@ -10,7 +11,10 @@ export function TabLayout() {
   const navigate = useNavigate();
   return (
     <div className={styles.layout}>
-      <Outlet />
+      {/* Zolang een scherm nog laadt (zoals de 3D-kaart), toon je even niets */}
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
       <div className={styles.settings}>
         <IconButton
           label={navigationTexts.openSettings}

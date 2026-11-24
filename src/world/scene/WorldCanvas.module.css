@@ -1,0 +1,6 @@
+.container {
+  position: absolute;
+  inset: 0;
+  /* De browser mag niet zelf scrollen of zoomen: de kaart regelt dat */
+  touch-action: none;
+}

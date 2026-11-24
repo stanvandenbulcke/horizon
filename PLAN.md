@@ -6,8 +6,8 @@ Dit is het bouwplan van Horizon. De volledige wensenlijst staat in
 [docs/spec/horizon-gigaprompt.md](docs/spec/horizon-gigaprompt.md). Belangrijke keuzes en
 waarom we ze maakten staan in [DECISIONS.md](DECISIONS.md).
 
-**Status:** ✅ M0 afgewerkt en getest op de iPhone. ✅ M1 gebouwd (label `m1`), nog te testen
-op de iPhone. Online op https://horizon.stanvandenbulck.workers.dev.
+**Status:** ✅ M0 afgewerkt en getest op de iPhone. ✅ M1 en M2 gebouwd (labels `m1`, `m2`),
+nog te testen op de iPhone. Online op https://horizon.stanvandenbulck.workers.dev.
 
 ---
 
@@ -101,7 +101,8 @@ horizon/
     │   ├── islands/       3D-eilanden (thuis, pad, brug)
     │   ├── creatures/     wezentjes en reisgezel, gebouwd uit vormen in code
     │   ├── boat/          de boot
-    │   └── models/        het laden van de Kenney-modellen
+    │   ├── decor/         palmbomen, hutje, vuurtoren, … uit eenvoudige vormen
+    │   └── labels/        naambordjes boven de eilanden
     ├── ui/                BOUWSTENEN – knoppen, kaartjes, schelpenteller, voortgangsring
     ├── audio/             de geluidsspeler en de lijst met geluiden
     ├── content/           ALLE TEKSTEN (Nederlands) en standaarddata

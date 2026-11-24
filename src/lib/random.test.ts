@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pickBySeed, pickDifferent, pickRandom } from './random';
+import { pickBySeed, pickDifferent, pickRandom, seededRandom } from './random';
 
 describe('pickRandom', () => {
   const items = ['a', 'b', 'c'] as const;
@@ -31,6 +31,27 @@ describe('pickBySeed', () => {
       ),
     );
     expect(picks.size).toBeGreaterThan(1);
+  });
+});
+
+describe('seededRandom', () => {
+  it('geeft voor hetzelfde zaadje altijd dezelfde reeks', () => {
+    const a = seededRandom('eiland-1');
+    const b = seededRandom('eiland-1');
+    expect([a(), a(), a()]).toEqual([b(), b(), b()]);
+  });
+
+  it('geeft voor een ander zaadje een andere reeks', () => {
+    expect(seededRandom('eiland-1')()).not.toBe(seededRandom('eiland-2')());
+  });
+
+  it('blijft altijd tussen 0 en 1', () => {
+    const random = seededRandom('test');
+    for (let i = 0; i < 1000; i++) {
+      const value = random();
+      expect(value).toBeGreaterThanOrEqual(0);
+      expect(value).toBeLessThan(1);
+    }
   });
 });
 

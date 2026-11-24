@@ -12,6 +12,12 @@ export default defineConfig({
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
 
+  build: {
+    // De 3D-kaart (three.js) is een groot pakket, maar het wordt pas geladen als je de kaart
+    // opent. Daarom mag het groter zijn dan de standaardgrens van 500 kB.
+    chunkSizeWarningLimit: 1200,
+  },
+
   plugins: [
     react(),
     VitePWA({

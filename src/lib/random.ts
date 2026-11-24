@@ -10,12 +10,9 @@ export function pickRandom<T>(items: readonly T[], random: RandomSource = Math.r
   return items[index] as T;
 }
 
-/**
- * Kiest altijd hetzelfde item voor hetzelfde zaadje (seed), bv. de dag van vandaag.
- * Zo verandert een tekst niet bij elke klik, maar wel elke dag.
- */
-export function pickBySeed<T>(items: readonly T[], seed: string): T {
-  // Een eenvoudige hash (FNV-1a): zet de tekst om in een getal
+/** Zet een tekst om in een getal dat er "willekeurig" uitziet, maar altijd hetzelfde is. */
+function hashSeed(seed: string): number {
+  // Een eenvoudige hash (FNV-1a)
   let hash = 2166136261;
   for (let i = 0; i < seed.length; i++) {
     hash = Math.imul(hash ^ seed.charCodeAt(i), 16777619);
@@ -27,7 +24,30 @@ export function pickBySeed<T>(items: readonly T[], seed: string): T {
   hash ^= hash >>> 13;
   hash = Math.imul(hash, 0xc2b2ae35);
   hash ^= hash >>> 16;
-  return pickRandom(items, () => (hash >>> 0) / 2 ** 32);
+  return hash >>> 0;
+}
+
+/**
+ * Kiest altijd hetzelfde item voor hetzelfde zaadje (seed), bv. de dag van vandaag.
+ * Zo verandert een tekst niet bij elke klik, maar wel elke dag.
+ */
+export function pickBySeed<T>(items: readonly T[], seed: string): T {
+  return pickRandom(items, () => hashSeed(seed) / 2 ** 32);
+}
+
+/**
+ * Een reeks "willekeurige" getallen die voor hetzelfde zaadje altijd dezelfde is.
+ * Zo ziet elk eiland er telkens hetzelfde uit, maar zijn alle eilanden anders.
+ */
+export function seededRandom(seed: string): RandomSource {
+  // Mulberry32: klein, snel en goed genoeg voor decor
+  let state = hashSeed(seed);
+  return () => {
+    state = (state + 0x6d2b79f5) | 0;
+    let t = Math.imul(state ^ (state >>> 15), 1 | state);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 2 ** 32;
+  };
 }
 
 /**

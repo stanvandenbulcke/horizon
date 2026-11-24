@@ -24,4 +24,18 @@ export const config = {
   companion: {
     maxNameLength: 20,
   },
+
+  /** Waar eilanden op de kaart komen (in kaarteenheden; je thuiseiland is ±7 breed). */
+  map: {
+    /** Afstand van het eerste eiland tot je thuiseiland */
+    firstRing: 10,
+    /** Hoe snel de spiraal van eilanden naar buiten groeit */
+    spacing: 6.5,
+    /** Minimale afstand tussen twee grote eilanden */
+    minDistance: 6.5,
+    /** Afstand van een side quest tot zijn hoofdeiland */
+    sideQuestDistance: 4.2,
+    /** Hoeveel mist er boven een nieuw eiland hangt (1 = alles); je ziet het net nog liggen */
+    startFog: 0.85,
+  },
 } as const;

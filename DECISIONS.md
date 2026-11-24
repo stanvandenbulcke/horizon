@@ -133,3 +133,26 @@ waar je vandaan kwam (bv. van de instellingen terug naar de kaart).
 van die routine wel terug.
 **Waarom:** uitgeven mag nooit voelen als iets verliezen, maar een per ongeluk gezet vinkje moet
 je wel kunnen terugdraaien.
+
+### D23 – 3D voorlopig volledig uit code, nog zonder Kenney-modellen · 2026-11-24
+**Keuze:** eilanden, palmbomen, hutje, vuurtoren, vlag, steiger, rotsen, mist en zee zijn allemaal
+gebouwd uit eenvoudige vormen in code (`src/world/decor/`).
+**Waarom:** zo werkt de kaart meteen, zonder bestanden te downloaden, en past alles in dezelfde
+chunky stijl. Kenney-modellen (CC0) kunnen later decor vervangen of aanvullen. Daarvoor vraagt
+Claude eerst toestemming om de pakketten te downloaden.
+
+### D24 – Eigen naambordjes in plaats van drei `Html` · 2026-11-24
+**Keuze:** de naambordjes boven eilanden zijn gewone HTML bovenop het canvas. Een klein stukje
+code (`LabelTracker`) schuift ze bij elke getekende frame naar de juiste plek.
+**Waarom:** het `Html`-onderdeel van drei vulde zijn inhoud niet in met deze React-versie.
+De eigen oplossing is ook lichter: React hoeft niets opnieuw te tekenen als je schuift.
+
+### D25 – De wereld beweegt alleen even na een aanraking · 2026-11-24
+**Keuze:** golfjes en wolkjes bewegen tot 20 seconden na je laatste aanraking. Daarna tekent de
+kaart niets meer tot je haar weer aanraakt. Met "minder beweging" aan op je iPhone bewegen ze niet.
+**Waarom:** een zee die altijd golft, laat je iPhone constant werken en kost batterij.
+
+### D26 – De kaart laadt pas als je ze opent · 2026-11-24
+**Keuze:** het kaartscherm (met three.js, ±250 kB gecomprimeerd) is een apart pakket dat pas
+geladen wordt als je de Kaart-tab opent. Het wordt wel meteen bewaard voor offline gebruik.
+**Waarom:** zo start de app snel op het thuisscherm, waar je dagelijkse routines staan.

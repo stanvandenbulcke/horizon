@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router';
 import { HomeScreen, homePaths } from '@/features/home';
+import { IslandScreen, islandsPaths } from '@/features/islands';
 import { LogbookScreen, logbookPaths } from '@/features/logbook';
 import { MapScreen, mapPaths } from '@/features/map';
 import {
@@ -23,6 +24,7 @@ export function AppRoutes() {
       </Route>
 
       {/* Schermen zonder tabs, met een terugknop */}
+      <Route path={islandsPaths.detailPattern} element={<IslandScreen />} />
       <Route path={settingsPaths.root} element={<SettingsScreen />} />
       <Route path={routinesPaths.list} element={<RoutinesScreen />} />
       <Route path={routinesPaths.add} element={<RoutinePickerScreen />} />

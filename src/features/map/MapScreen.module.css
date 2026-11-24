@@ -1,0 +1,15 @@
+.map {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Meldingen en knoppen zweven onderaan, net boven de tabs */
+.overlay {
+  position: absolute;
+  right: calc(var(--safe-right) + var(--space-4));
+  bottom: calc(var(--safe-bottom) + var(--tab-bar-height) + var(--space-6));
+  left: calc(var(--safe-left) + var(--space-4));
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
