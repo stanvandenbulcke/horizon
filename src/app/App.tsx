@@ -1,6 +1,13 @@
-import { HomeScreen } from '@/features/home';
+import { BrowserRouter } from 'react-router';
+import { AppRoutes } from './AppRoutes';
+import { useStartup } from './useStartup';
 
-/** Het hoofdcomponent. Vanaf M1 komen hier de 3 tabs en de schermwissels. */
+/** Het hoofdcomponent: zet de schermwissels klaar en doet wat nodig is bij het opstarten. */
 export function App() {
-  return <HomeScreen />;
+  useStartup();
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }

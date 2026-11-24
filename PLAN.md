@@ -6,8 +6,8 @@ Dit is het bouwplan van Horizon. De volledige wensenlijst staat in
 [docs/spec/horizon-gigaprompt.md](docs/spec/horizon-gigaprompt.md). Belangrijke keuzes en
 waarom we ze maakten staan in [DECISIONS.md](DECISIONS.md).
 
-**Status:** ✅ M0 afgewerkt (label `m0`), online op https://horizon.stanvandenbulck.workers.dev
-en getest op de iPhone. Volgende: M1 – Data en routines.
+**Status:** ✅ M0 afgewerkt en getest op de iPhone. ✅ M1 gebouwd (label `m1`), nog te testen
+op de iPhone. Online op https://horizon.stanvandenbulck.workers.dev.
 
 ---
 
@@ -28,7 +28,7 @@ en getest op de iPhone. Volgende: M1 – Data en routines.
 | Schermwissels | **React Router** | Regelt de 3 tabs, het eilandscherm en instellingen, en laat de terugknop werken. |
 | Offline + installeren | **vite-plugin-pwa** | Maakt automatisch het manifest (naam, icoon) en de service worker (het stukje dat de app offline laat werken). |
 | Geluid | **Howler.js** | Lost de lastige geluidsregels van Safari op iPhone voor ons op. |
-| Datums | **date-fns** | Kleine, betrouwbare hulpjes voor weken (maandag tot zondag) en de dagwissel om 04:00. |
+| Datums | **eigen hulpjes** in `src/game/time/` | Een paar kleine, geteste functies voor de dagwissel om 04:00; een extra bibliotheek is niet nodig (zie D19). |
 | Lettertypes | **Fredoka** (titels) + **Nunito** (tekst), via Fontsource | Allebei rond en gratis, en we zetten ze in de app zelf zodat ze offline werken. |
 | Tests | **Vitest** (+ fake-indexeddb) | Test de spelregels automatisch, zodat een fix later niets anders kapotmaakt. |
 | Netheid | **ESLint + Prettier** | Prettier zet alle code automatisch in dezelfde vorm, ESLint bewaakt de regels uit §2. |

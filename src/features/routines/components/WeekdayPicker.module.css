@@ -1,0 +1,17 @@
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-1);
+}
+
+/* Op smalle schermen iets compacter, zodat alle 7 dagen op één rij passen */
+.days > button {
+  min-width: 0;
+  padding: 0;
+}

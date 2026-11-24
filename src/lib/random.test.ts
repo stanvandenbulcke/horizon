@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pickDifferent, pickRandom } from './random';
+import { pickBySeed, pickDifferent, pickRandom } from './random';
 
 describe('pickRandom', () => {
   const items = ['a', 'b', 'c'] as const;
@@ -14,6 +14,23 @@ describe('pickRandom', () => {
 
   it('geeft een duidelijke fout bij een lege lijst', () => {
     expect(() => pickRandom([])).toThrow('de lijst is leeg');
+  });
+});
+
+describe('pickBySeed', () => {
+  const items = ['a', 'b', 'c', 'd', 'e'];
+
+  it('kiest altijd hetzelfde voor hetzelfde zaadje', () => {
+    expect(pickBySeed(items, '2026-11-24')).toBe(pickBySeed(items, '2026-11-24'));
+  });
+
+  it('kiest niet elke dag hetzelfde', () => {
+    const picks = new Set(
+      ['2026-11-20', '2026-11-21', '2026-11-22', '2026-11-23', '2026-11-24'].map((day) =>
+        pickBySeed(items, day),
+      ),
+    );
+    expect(picks.size).toBeGreaterThan(1);
   });
 });
 

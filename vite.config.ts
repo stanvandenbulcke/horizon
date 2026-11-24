@@ -54,5 +54,9 @@ export default defineConfig({
 
   test: {
     include: ['src/**/*.test.{ts,tsx}'],
+    // Tests draaien altijd in Belgische tijd, zodat de dagwissel om 04:00 overal hetzelfde test
+    env: { TZ: 'Europe/Brussels' },
+    // Een nep-database in het geheugen, zodat tests de opslag kunnen testen zonder browser
+    setupFiles: ['fake-indexeddb/auto'],
   },
 });

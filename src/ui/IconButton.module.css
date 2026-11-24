@@ -1,0 +1,45 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 3px solid var(--color-outline);
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: 0 4px 0 var(--color-outline);
+  color: var(--color-ink);
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--color-outline);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.normal {
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+}
+
+/* Kleiner, maar nog altijd groot genoeg voor een duim (44px) */
+.small {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  box-shadow: 0 3px 0 var(--color-outline);
+}

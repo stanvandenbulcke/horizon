@@ -1,0 +1,104 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 76px;
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3);
+  border: 3px solid var(--color-outline);
+  border-radius: var(--radius-m);
+  background: var(--color-white);
+  box-shadow: 0 5px 0 var(--color-outline);
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out,
+    background-color 200ms ease;
+}
+
+.card:active {
+  transform: translateY(4px) scale(0.99);
+  box-shadow: 0 1px 0 var(--color-outline);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: 3px;
+}
+
+.emoji {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  font-size: 28px;
+}
+
+/* Het groene vinkje verschijnt pas als de routine gedaan is */
+.check {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--color-outline);
+  border-radius: 50%;
+  background: var(--color-leaf);
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 900;
+  transform: scale(0);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.name {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.shells {
+  flex-shrink: 0;
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.done {
+  background: var(--color-leaf-light);
+}
+
+.done .check {
+  transform: scale(1);
+}
+
+.done .emoji {
+  animation: pop 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.done .shells {
+  color: var(--color-leaf-dark);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

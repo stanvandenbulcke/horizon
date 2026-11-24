@@ -1,13 +1,15 @@
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   min-height: var(--tap-min);
-  padding: 0 var(--space-8);
+  padding: 0 var(--space-6);
   border: 3px solid var(--color-outline);
   border-radius: var(--radius-m);
-  background: linear-gradient(#ffd45c, var(--color-sun-dark));
   box-shadow: 0 6px 0 var(--color-outline);
-  color: var(--color-ink);
   font-family: var(--font-title);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -16,7 +18,7 @@
 }
 
 /* Inzakken bij tikken: de knop zakt in zijn eigen schaduw */
-.button:active {
+.button:active:not(:disabled) {
   transform: translateY(4px);
   box-shadow: 0 2px 0 var(--color-outline);
 }
@@ -24,4 +26,28 @@
 .button:focus-visible {
   outline: 3px solid var(--color-white);
   outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.primary {
+  background: linear-gradient(#ffd45c, var(--color-sun-dark));
+  color: var(--color-ink);
+}
+
+.secondary {
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.danger {
+  background: linear-gradient(#f2696e, var(--color-danger));
+  color: var(--color-white);
+}
+
+.fullWidth {
+  width: 100%;
 }

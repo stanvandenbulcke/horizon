@@ -109,3 +109,27 @@ bij het openen gebeurt, word je niet onderbroken terwijl je iets invult.
 ### D18 – Git-naam zonder echt e-mailadres · 2026-11-24
 **Keuze:** commits staan op naam van "Stan <stan@horizon.local>" (alleen in dit project).
 **Waarom:** zo komt je echte e-mailadres niet op GitHub.
+
+### D19 – Eigen datumhulpjes in plaats van date-fns · 2026-11-24
+**Keuze:** de dagwissel om 04:00, dagen optellen en de dag van de week staan in
+`src/game/time/gameDay.ts`, met tests (ook voor de nachten van zomer- en wintertijd).
+**Waarom:** we hebben maar een handvol functies nodig. Zonder extra bibliotheek blijft de app
+kleiner, en we weten precies wat er gebeurt.
+
+### D20 – Het dagboekje gebruikt de dag als id · 2026-11-24
+**Keuze:** een `DayLog` heeft als id de dag zelf (bv. `2026-11-24`) in plaats van een UUID.
+**Waarom:** er is precies één dagboekje per dag. Als je later op twee toestellen speelt, horen
+die automatisch bij elkaar in plaats van dubbel te staan. (Uitzondering op D9.)
+
+### D21 – Schermadressen per feature, terugknop = vorig scherm · 2026-11-24
+**Keuze:** elke feature heeft een `paths.ts` met haar adressen. De terugknop (`useGoBack`) gaat
+terug naar het vorige scherm, of één niveau omhoog als er geen vorig scherm is.
+**Waarom:** zo staan adressen naast de schermen die ze tonen, en kom je na "terug" altijd uit
+waar je vandaan kwam (bv. van de instellingen terug naar de kaart).
+
+### D22 – Wat telt mee voor je dagdoel · 2026-11-24
+**Keuze:** alle schelpen die je op een dag verdient, tellen mee voor je dagdoel. Schelpen uitgeven
+(bv. aan een schild) maakt je dagvoortgang nooit kleiner. Een vinkje weghalen neemt de schelpen
+van die routine wel terug.
+**Waarom:** uitgeven mag nooit voelen als iets verliezen, maar een per ongeluk gezet vinkje moet
+je wel kunnen terugdraaien.

@@ -10,8 +10,14 @@
   --color-sun-dark: #e8921c;
   --color-sand: #f6cf7a;
   --color-ink: #12324a; /* donkere tekst */
+  --color-muted: #4f6b7e; /* zachtere tekst, nog altijd goed leesbaar */
   --color-outline: #0d3550; /* dikke randen in Clash-stijl */
   --color-white: #ffffff;
+  --color-paper: #fff6e3; /* achtergrond van rustige schermen zoals instellingen */
+  --color-leaf: #3dbe6b;
+  --color-leaf-light: #d9f5e3;
+  --color-leaf-dark: #1f8a45;
+  --color-danger: #d93f45;
 
   /* Lettertypes */
   --font-title: 'Fredoka', 'Nunito', system-ui, sans-serif;
@@ -32,6 +38,12 @@
 
   /* Minimale hoogte van iets waarop je tikt: makkelijk met je duim */
   --tap-min: 56px;
+
+  /* Hoogte van de tabs onderaan (zonder de safe area) */
+  --tab-bar-height: 72px;
+
+  /* Breedste kolom voor tekst en knoppen (op een groot scherm) */
+  --content-max: 560px;
 
   /* Safe areas: de ruimte rond de notch en de balk onderaan je iPhone */
   --safe-top: env(safe-area-inset-top, 0px);

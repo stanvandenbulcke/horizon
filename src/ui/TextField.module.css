@@ -1,0 +1,30 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-weight: 700;
+}
+
+.input {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: 3px solid var(--color-outline);
+  border-radius: var(--radius-s);
+  background: var(--color-white);
+  color: var(--color-ink);
+  /* Minstens 16px, anders zoomt de iPhone in als je tikt */
+  font: inherit;
+  font-size: 18px;
+}
+
+.input:focus {
+  outline: 3px solid var(--color-sun);
+  outline-offset: 1px;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}

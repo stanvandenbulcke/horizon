@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 56px;
+}
+
+.title {
+  flex: 1;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Even breed als een knop, zodat de titel mooi in het midden staat */
+.spacer {
+  width: 48px;
+  flex-shrink: 0;
+}

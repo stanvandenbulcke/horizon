@@ -1,0 +1,25 @@
+import { Outlet, useNavigate } from 'react-router';
+import { navigationTexts } from '@/content/texts/navigation';
+import { settingsPaths } from '@/features/settings';
+import { IconButton } from '@/ui/IconButton';
+import { TabBar } from './TabBar';
+import styles from './TabLayout.module.css';
+
+/** De schermen met tabs onderaan, en het tandwiel rechtsboven. */
+export function TabLayout() {
+  const navigate = useNavigate();
+  return (
+    <div className={styles.layout}>
+      <Outlet />
+      <div className={styles.settings}>
+        <IconButton
+          label={navigationTexts.openSettings}
+          onClick={() => void navigate(settingsPaths.root)}
+        >
+          ⚙️
+        </IconButton>
+      </div>
+      <TabBar />
+    </div>
+  );
+}

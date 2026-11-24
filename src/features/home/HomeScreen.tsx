@@ -1,39 +1,92 @@
-import { useState } from 'react';
-import { welcomeTexts } from '@/content/texts/welcome';
-import { pickDifferent, pickRandom } from '@/lib/random';
+import { useNavigate } from 'react-router';
+import { toggleRoutine } from '@/actions/routines/toggleRoutine';
+import { homeTexts } from '@/content/texts/home';
+import { useDayLog } from '@/data/hooks/useDayLog';
+import { useGameDay } from '@/data/hooks/useGameDay';
+import { useProfile } from '@/data/hooks/useProfile';
+import { useRoutines } from '@/data/hooks/useRoutines';
+import { useShellBalance, useShellsEarnedOn } from '@/data/hooks/useShells';
+import { routinesForDay } from '@/game/routines/routine';
+import { goalProgress } from '@/game/shells/shells';
+import { routinesPaths } from '@/features/routines';
+import { pickBySeed } from '@/lib/random';
 import { Button } from '@/ui/Button';
+import { Notice } from '@/ui/Notice';
+import { Pill } from '@/ui/Pill';
+import { Screen } from '@/ui/Screen';
+import { DailyGoal } from './components/DailyGoal';
+import { RoutineCard } from './components/RoutineCard';
 import styles from './HomeScreen.module.css';
 
-/**
- * Het "Hallo Horizon"-scherm van M0.
- * In M1 wordt dit het echte thuiseiland met je routines en schelpen.
- */
+/** 🏝️ Thuis: je routines van vandaag, je schelpen en je dagdoel. */
 export function HomeScreen() {
-  const [greeting, setGreeting] = useState(() => pickRandom(welcomeTexts.greetings));
+  const navigate = useNavigate();
+  const day = useGameDay();
+  const profile = useProfile();
+  const routines = useRoutines();
+  const dayLog = useDayLog(day);
+  const balance = useShellBalance();
+  const earned = useShellsEarnedOn(day);
 
-  const showAnotherGreeting = () => {
-    setGreeting((current) => pickDifferent(welcomeTexts.greetings, current));
-  };
+  const loading =
+    !profile || !routines || dayLog === undefined || balance === undefined || earned === undefined;
+  if (loading) {
+    return <Screen tone="sky" withTabBar />;
+  }
+
+  const progress = goalProgress(earned, dayLog?.dailyGoal ?? profile.dailyGoal);
+  const todaysRoutines = routinesForDay(routines, day);
+  const completed = new Set(dayLog?.completedRoutineIds ?? []);
 
   return (
-    <main className={styles.screen}>
-      <div className={styles.sun} aria-hidden="true" />
-      <div className={styles.sea} aria-hidden="true" />
+    <Screen tone="sky" withTabBar>
+      <div className={styles.topBar}>
+        <Pill icon="🐚" label={homeTexts.shellBalance(balance)}>
+          {balance}
+        </Pill>
+      </div>
 
-      <header className={styles.header}>
-        <h1 className={styles.title}>{welcomeTexts.title}</h1>
-        <p className={styles.tagline}>{welcomeTexts.tagline}</p>
-      </header>
+      <h1 className={styles.greeting}>{pickBySeed(homeTexts.greetings, day)}</h1>
 
-      {/* De key zorgt dat de ballon bij elke nieuwe groet opnieuw stuitert */}
-      <p key={greeting} className={styles.bubble} aria-live="polite">
-        {greeting}
-      </p>
+      <DailyGoal progress={progress} day={day} />
 
-      <footer className={styles.footer}>
-        <Button onClick={showAnotherGreeting}>{welcomeTexts.anotherGreeting}</Button>
-        <p className={styles.note}>{welcomeTexts.comingSoon}</p>
-      </footer>
-    </main>
+      <section className={styles.today} aria-labelledby="today-title">
+        <h2 id="today-title" className={styles.sectionTitle}>
+          {homeTexts.todayTitle}
+        </h2>
+
+        {routines.length === 0 ? (
+          <Notice {...homeTexts.noRoutines}>
+            <Button onClick={() => navigate(routinesPaths.add)}>
+              {homeTexts.noRoutines.button}
+            </Button>
+          </Notice>
+        ) : todaysRoutines.length === 0 ? (
+          <Notice
+            icon={homeTexts.nothingToday.icon}
+            title={homeTexts.nothingToday.title}
+            text={pickBySeed(homeTexts.nothingToday.text, day)}
+          />
+        ) : (
+          <ul className={styles.list}>
+            {todaysRoutines.map((routine) => (
+              <li key={routine.id}>
+                <RoutineCard
+                  routine={routine}
+                  done={completed.has(routine.id)}
+                  onToggle={() => void toggleRoutine(routine.id, day)}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {routines.length > 0 && (
+          <Button variant="secondary" onClick={() => navigate(routinesPaths.list)}>
+            {homeTexts.manageRoutines}
+          </Button>
+        )}
+      </section>
+    </Screen>
   );
 }
