@@ -9,6 +9,12 @@ export interface IslandWithProgress {
   island: Island;
   /** Van 0 (net begonnen) tot 1 (af) */
   progress: number;
+  /** Hoeveel bezienswaardigheden (of pijlers) al bereikt zijn: zo groot is het wezentje */
+  reachedLandmarks: number;
+}
+
+function reachedCount(landmarks: readonly Landmark[]): number {
+  return landmarks.filter((landmark) => landmark.completedAt !== null).length;
 }
 
 export interface IslandDetail extends IslandWithProgress {
@@ -29,10 +35,14 @@ export function useIslandsWithProgress(): IslandWithProgress[] | undefined {
       landmarkRepository.listAll(),
       stepRepository.listAll(),
     ]);
-    return islands.map((island) => ({
-      island,
-      progress: islandProgress(island, byIsland(landmarks, island.id), byIsland(steps, island.id)),
-    }));
+    return islands.map((island) => {
+      const own = byIsland(landmarks, island.id);
+      return {
+        island,
+        progress: islandProgress(island, own, byIsland(steps, island.id)),
+        reachedLandmarks: reachedCount(own),
+      };
+    });
   }, []);
 }
 
@@ -55,6 +65,7 @@ export function useIslandDetail(id: Id | undefined): IslandDetail | null | undef
       .map((quest) => ({
         island: quest,
         progress: islandProgress(quest, [], byIsland(allSteps, quest.id)),
+        reachedLandmarks: 0,
       }));
     return {
       island,
@@ -62,6 +73,7 @@ export function useIslandDetail(id: Id | undefined): IslandDetail | null | undef
       steps,
       sideQuests,
       progress: islandProgress(island, landmarks, steps),
+      reachedLandmarks: reachedCount(landmarks),
     };
   }, [id]);
 }

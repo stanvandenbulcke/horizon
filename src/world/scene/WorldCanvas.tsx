@@ -10,7 +10,7 @@ import { LabelTracker } from '@/world/labels/LabelTracker';
 import type { LabelAnchor, LabelElements } from '@/world/labels/labelTypes';
 import { MapLabels } from '@/world/labels/MapLabels';
 import { Sea } from '@/world/sea/Sea';
-import type { MapIsland } from '@/world/types';
+import type { HomeView, MapIsland } from '@/world/types';
 import { worldConfig } from '@/world/worldConfig';
 import { AmbientMotion } from './AmbientMotion';
 import { CameraRig } from './CameraRig';
@@ -20,6 +20,7 @@ import styles from './WorldCanvas.module.css';
 
 interface WorldCanvasProps {
   islands: readonly MapIsland[];
+  home: HomeView;
   onIslandSelect: (id: string) => void;
   onHomeSelect: () => void;
 }
@@ -53,7 +54,7 @@ function labelAnchors(islands: readonly MapIsland[]): LabelAnchor[] {
  * De hele 3D-levenskaart: zee, thuiseiland, doeleilanden, mist en naambordjes.
  * Tekent alleen als er iets beweegt (`frameloop="demand"`), om batterij te sparen.
  */
-export function WorldCanvas({ islands, onIslandSelect, onHomeSelect }: WorldCanvasProps) {
+export function WorldCanvas({ islands, home, onIslandSelect, onHomeSelect }: WorldCanvasProps) {
   const palette = useMemo(() => timeOfDayPalette(new Date().getHours()), []);
   const labels = useMemo(() => labelAnchors(islands), [islands]);
   const labelElements = useRef<LabelElements>(new Map());
@@ -77,7 +78,7 @@ export function WorldCanvas({ islands, onIslandSelect, onHomeSelect }: WorldCanv
           deep={palette.seaDeep}
           lightDirection={worldConfig.sunDirection}
         />
-        <HomeIsland onSelect={onHomeSelect} />
+        <HomeIsland home={home} onSelect={onHomeSelect} />
         {islands.map((island) => (
           <GoalIsland key={island.id} island={island} onSelect={onIslandSelect} />
         ))}

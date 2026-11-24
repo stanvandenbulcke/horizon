@@ -1,4 +1,4 @@
-import { MeshBasicMaterial, MeshLambertMaterial } from 'three';
+import { Color, MeshBasicMaterial, MeshLambertMaterial } from 'three';
 
 /** Mat materiaal met platte vlakken: geeft de chunky low-poly look en is zuinig. */
 function flat(color: string): MeshLambertMaterial {
@@ -28,7 +28,31 @@ export const materials = {
   cloud: new MeshLambertMaterial({ color: '#ffffff', emissive: '#b9cad8', flatShading: true }),
   lampOn: new MeshBasicMaterial({ color: '#ffe27a' }),
   lampOff: flat('#6f7f8a'),
+  // Wezentjes: gladde vormen (niet plat) zien er zachter en schattiger uit
+  eyeWhite: new MeshBasicMaterial({ color: '#ffffff' }),
+  pupil: new MeshBasicMaterial({ color: '#1d2433' }),
+  cheek: new MeshLambertMaterial({ color: '#ff9fb3' }),
+  horn: new MeshLambertMaterial({ color: '#fff1c9' }),
+  scarf: new MeshLambertMaterial({ color: '#e8604c' }),
+  hat: new MeshLambertMaterial({ color: '#2b3340' }),
+  gold: new MeshLambertMaterial({ color: '#ffc53d', emissive: '#7a4f00' }),
+  petalCenter: new MeshLambertMaterial({ color: '#ffd84d' }),
 };
+
+const creatureBodies = new Map<string, MeshLambertMaterial>();
+
+/** Het lijfje van een wezentje (glad, in de kleur van zijn eiland). Lichter = de buik. */
+export function creatureMaterial(color: string, lighter = false): MeshLambertMaterial {
+  const key = `${color}-${lighter}`;
+  let material = creatureBodies.get(key);
+  if (!material) {
+    const tone = new Color(color);
+    if (lighter) tone.lerp(new Color('#ffffff'), 0.55);
+    material = new MeshLambertMaterial({ color: tone });
+    creatureBodies.set(key, material);
+  }
+  return material;
+}
 
 const tinted = new Map<string, MeshLambertMaterial>();
 

@@ -37,6 +37,11 @@ export const worldConfig = {
     /** Hoogte van het gras boven het water */
     landHeight: 0.65,
   },
+  /** Je reisgezel: een wezentje in een warme kleur */
+  companion: {
+    species: 'blob',
+    color: '#ffb547',
+  },
   bridge: {
     /** Hoe lang de brug is, van de steiger tot het eiland */
     length: 4.6,

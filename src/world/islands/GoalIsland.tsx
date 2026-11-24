@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Creature } from '@/world/creatures/Creature';
 import { BridgeSpan } from '@/world/decor/BridgeSpan';
 import { Flag } from '@/world/decor/Flag';
 import { Lighthouse } from '@/world/decor/Lighthouse';
@@ -50,6 +51,16 @@ export function GoalIsland({ island, onSelect }: GoalIslandProps) {
           )}
           <PalmTree position={[0.9, 0, 0.5]} rotation={[0, 2, 0]} scale={0.8} />
           <Rocks position={[0.4, 0, -1.2]} scale={0.6} />
+          {island.creature && (
+            <Creature
+              species={island.creature.species}
+              color={island.color}
+              dancing={island.completed}
+              position={[0.55, 0, 0.95]}
+              rotation={[0, Math.PI / 4, 0]}
+              scale={0.45 + island.creature.stage * 0.13}
+            />
+          )}
         </group>
       </group>
       {island.type === 'bridge' && (

@@ -1,4 +1,11 @@
-import { BoxGeometry, ConeGeometry, CylinderGeometry, DodecahedronGeometry } from 'three';
+import {
+  BoxGeometry,
+  ConeGeometry,
+  CylinderGeometry,
+  DodecahedronGeometry,
+  IcosahedronGeometry,
+  TorusGeometry,
+} from 'three';
 
 /**
  * Vormen die veel decorstukken delen, één keer gemaakt. Elk stuk schaalt ze naar zijn eigen maat.
@@ -14,4 +21,8 @@ export const shapes = {
   pyramid: new ConeGeometry(0.5, 1, 4),
   cone: new ConeGeometry(0.5, 1, 7),
   rock: new DodecahedronGeometry(0.5, 0),
+  /** Een bol met straal 1, rond genoeg voor schattige wezentjes */
+  sphere: new IcosahedronGeometry(1, 2),
+  /** Een ring (sjaal, kroon) met straal 1 */
+  ring: new TorusGeometry(1, 0.2, 6, 16),
 };

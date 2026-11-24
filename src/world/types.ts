@@ -1,4 +1,13 @@
+import type { CreatureSpecies } from '@/game/creatures/creature';
 import type { IslandType, MapPosition } from '@/game/model';
+
+/** Je reisgezel en zijn tuin, zoals de wereld ze moet tekenen. */
+export interface HomeView {
+  /** 0 tot 3: de look die je reisgezel vrijspeelde */
+  companionLook: number;
+  /** Aantal plantjes in de tuin */
+  gardenSize: number;
+}
 
 /**
  * Wat de 3D-wereld van een eiland moet weten om het te tekenen.
@@ -18,4 +27,6 @@ export interface MapIsland {
   progress: number;
   sleeping: boolean;
   completed: boolean;
+  /** Het wezentje dat op dit eiland woont (side quests hebben er geen) */
+  creature: { species: CreatureSpecies; stage: number } | null;
 }

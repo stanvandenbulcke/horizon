@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { mapTexts } from '@/content/texts/map';
+import { useCompanion } from '@/data/hooks/useCompanion';
 import { useIslandsWithProgress } from '@/data/hooks/useIslands';
 import { homePaths } from '@/features/home';
 import { islandsPaths } from '@/features/islands';
@@ -17,12 +18,19 @@ import styles from './MapScreen.module.css';
 export default function MapScreen() {
   const navigate = useNavigate();
   const islands = useIslandsWithProgress();
+  const companion = useCompanion();
   const mapIslands = useMemo(
     () =>
       (islands ?? [])
         .filter(({ island }) => island.status !== 'drifted')
-        .map(({ island, progress }) => toMapIsland(island, progress)),
+        .map(({ island, progress, reachedLandmarks }) =>
+          toMapIsland(island, progress, reachedLandmarks),
+        ),
     [islands],
+  );
+  const home = useMemo(
+    () => ({ companionLook: companion?.look ?? 0, gardenSize: companion?.points ?? 0 }),
+    [companion],
   );
   const createIsland = () => void navigate(islandsPaths.create);
 
@@ -30,6 +38,7 @@ export default function MapScreen() {
     <div className={styles.map}>
       <WorldCanvas
         islands={mapIslands}
+        home={home}
         onIslandSelect={(id) => void navigate(islandsPaths.detail(id))}
         onHomeSelect={() => void navigate(homePaths.root)}
       />

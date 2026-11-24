@@ -44,4 +44,13 @@ export const homeTexts = {
     ],
   },
   manageRoutines: 'Routines aanpassen',
+  companion: {
+    level: (level: number) => `level ${level}`,
+    toNext: (points: number) =>
+      points === 1
+        ? 'nog 1 dagdoel tot het volgende level'
+        : `nog ${points} dagdoelen tot het volgende level`,
+    sceneLabel: (name: string) =>
+      `Je thuiseiland met ${name} en de tuin. Tik op ${name} voor een dansje.`,
+  },
 } as const;

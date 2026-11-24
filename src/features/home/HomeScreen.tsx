@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router';
 import { toggleRoutine } from '@/actions/routines/toggleRoutine';
 import { celebrationTexts } from '@/content/texts/celebrations';
 import { homeTexts } from '@/content/texts/home';
+import { useCompanion } from '@/data/hooks/useCompanion';
 import { useDayLog } from '@/data/hooks/useDayLog';
 import { useGameDay } from '@/data/hooks/useGameDay';
 import { useProfile } from '@/data/hooks/useProfile';
@@ -17,6 +18,7 @@ import { Button } from '@/ui/Button';
 import { Notice } from '@/ui/Notice';
 import { Pill } from '@/ui/Pill';
 import { Screen } from '@/ui/Screen';
+import { CompanionPanel } from './components/CompanionPanel';
 import { DailyGoal } from './components/DailyGoal';
 import { RoutineCard } from './components/RoutineCard';
 import styles from './HomeScreen.module.css';
@@ -30,6 +32,7 @@ export function HomeScreen() {
   const dayLog = useDayLog(day);
   const balance = useShellBalance();
   const earned = useShellsEarnedOn(day);
+  const companion = useCompanion();
 
   const loading =
     !profile || !routines || dayLog === undefined || balance === undefined || earned === undefined;
@@ -61,6 +64,8 @@ export function HomeScreen() {
       </div>
 
       <h1 className={styles.greeting}>{pickBySeed(homeTexts.greetings, day)}</h1>
+
+      {companion && <CompanionPanel name={profile.companionName} companion={companion} />}
 
       <DailyGoal progress={progress} day={day} />
 

@@ -1,0 +1,19 @@
+.panel {
+  overflow: hidden;
+  border: 3px solid var(--color-outline);
+  border-radius: var(--radius-l);
+  background: var(--color-sea);
+  box-shadow: 0 6px 0 var(--color-outline);
+}
+
+.scene {
+  height: 230px;
+}
+
+.caption {
+  padding: var(--space-2) var(--space-4);
+  border-top: 3px solid var(--color-outline);
+  background: var(--color-white);
+  font-size: 15px;
+  text-align: center;
+}
