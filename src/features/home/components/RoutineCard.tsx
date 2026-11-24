@@ -6,7 +6,8 @@ import styles from './RoutineCard.module.css';
 interface RoutineCardProps {
   routine: Routine;
   done: boolean;
-  onToggle: () => void;
+  /** Krijgt de knop mee, zodat het feestje vanaf de juiste plek kan spatten */
+  onToggle: (card: HTMLElement) => void;
 }
 
 /** Eén routine op het thuisscherm. Eén tik = afgevinkt, nog een tik = ongedaan. */
@@ -17,7 +18,7 @@ export function RoutineCard({ routine, done, onToggle }: RoutineCardProps) {
       className={cx(styles.card, done && styles.done)}
       aria-pressed={done}
       aria-label={homeTexts.routineLabel(routine.name, routine.shells)}
-      onClick={onToggle}
+      onClick={(event) => onToggle(event.currentTarget)}
     >
       <span className={styles.emoji} aria-hidden="true">
         {routine.emoji}

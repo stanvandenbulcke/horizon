@@ -23,6 +23,15 @@ export const config = {
 
   companion: {
     maxNameLength: 20,
+    /** Elke 7 groeipunten (= 7 dagen met je dagdoel gehaald) gaat je reisgezel een level omhoog */
+    pointsPerLevel: 7,
+    /** Op deze levels krijgt je reisgezel een nieuwe look */
+    lookLevels: [3, 6, 10],
+  },
+
+  creatures: {
+    /** Een wezentje groeit tot dit stadium (1 = net uit het ei) */
+    maxStage: 4,
   },
 
   islands: {

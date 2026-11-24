@@ -59,7 +59,6 @@ export const islandTexts = {
     inTheFog: 'Nog in de mist',
     landmarkCount: (reached: number, total: number) =>
       `${reached} van ${total} bezienswaardigheden bereikt`,
-    landReached: ['Land in zicht!', 'Amai, bezienswaardigheid bereikt!', 'Goe bezig, kapitein!'],
   },
 
   steps: {
@@ -123,12 +122,5 @@ export const islandTexts = {
     delete: 'Eiland verwijderen',
     deleteConfirm: 'Zeker? Tik nog eens.',
     deleteHint: 'Alles wat erop staat, verdwijnt ook. Je schelpen hou je.',
-  },
-
-  /** Korte jubelberichtjes (in M4 komt daar een echt feestje bij) */
-  cheers: {
-    landmark: ['Land in zicht!', 'Amai, bezienswaardigheid bereikt!', 'Goe bezig, kapitein!'],
-    pillar: ['Pijler geplaatst! 🏛️', 'Weer een pijler erbij. Stevig!', 'De brug groeit!'],
-    island: ['Eiland verkend! 🏆', 'Allee, dat eiland is van u!', 'Vuurwerk! (binnenkort echt)'],
   },
 } as const;

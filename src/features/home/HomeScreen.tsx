@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router';
 import { toggleRoutine } from '@/actions/routines/toggleRoutine';
+import { celebrationTexts } from '@/content/texts/celebrations';
 import { homeTexts } from '@/content/texts/home';
 import { useDayLog } from '@/data/hooks/useDayLog';
 import { useGameDay } from '@/data/hooks/useGameDay';
 import { useProfile } from '@/data/hooks/useProfile';
 import { useRoutines } from '@/data/hooks/useRoutines';
 import { useShellBalance, useShellsEarnedOn } from '@/data/hooks/useShells';
+import { celebrate } from '@/features/celebrations';
+import { routinesPaths } from '@/features/routines';
+import type { Routine } from '@/game/model';
 import { routinesForDay } from '@/game/routines/routine';
 import { goalProgress } from '@/game/shells/shells';
-import { routinesPaths } from '@/features/routines';
-import { pickBySeed } from '@/lib/random';
+import { pickBySeed, pickRandom } from '@/lib/random';
 import { Button } from '@/ui/Button';
 import { Notice } from '@/ui/Notice';
 import { Pill } from '@/ui/Pill';
@@ -37,6 +40,17 @@ export function HomeScreen() {
   const progress = goalProgress(earned, dayLog?.dailyGoal ?? profile.dailyGoal);
   const todaysRoutines = routinesForDay(routines, day);
   const completed = new Set(dayLog?.completedRoutineIds ?? []);
+
+  const toggle = async (routine: Routine, card: HTMLElement) => {
+    const result = await toggleRoutine(routine.id, day);
+    if (!result.completed) return;
+    if (result.goalReached) {
+      const message = pickRandom(celebrationTexts.goalReached(profile.companionName));
+      celebrate('medium', { message });
+    } else {
+      celebrate('small', { from: card });
+    }
+  };
 
   return (
     <Screen tone="sky" withTabBar>
@@ -74,7 +88,7 @@ export function HomeScreen() {
                 <RoutineCard
                   routine={routine}
                   done={completed.has(routine.id)}
-                  onToggle={() => void toggleRoutine(routine.id, day)}
+                  onToggle={(card) => void toggle(routine, card)}
                 />
               </li>
             ))}

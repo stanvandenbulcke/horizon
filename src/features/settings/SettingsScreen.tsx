@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import { setDailyGoal } from '@/actions/profile/profile';
+import { setDailyGoal, setSoundOn } from '@/actions/profile/profile';
 import { navigationTexts } from '@/content/texts/navigation';
 import { settingsTexts } from '@/content/texts/settings';
 import { useGameDay } from '@/data/hooks/useGameDay';
@@ -12,8 +12,10 @@ import { Card } from '@/ui/Card';
 import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
 import { Stepper } from '@/ui/Stepper';
+import { ToggleChip } from '@/ui/ToggleChip';
 import { useGoBack } from '@/ui/useGoBack';
 import { CompanionNameField } from './components/CompanionNameField';
+import styles from './SettingsScreen.module.css';
 
 /** ⚙️ Instellingen: dagdoel, naam van je reisgezel en routines. */
 export function SettingsScreen() {
@@ -42,6 +44,17 @@ export function SettingsScreen() {
 
           <Card title={settingsTexts.companion.title} hint={settingsTexts.companion.hint}>
             <CompanionNameField key={profile.companionName} initialName={profile.companionName} />
+          </Card>
+
+          <Card title={settingsTexts.sound.title} hint={settingsTexts.sound.hint}>
+            <div className={styles.choice}>
+              <ToggleChip pressed={profile.soundOn} onToggle={() => void setSoundOn(true)}>
+                {settingsTexts.sound.on}
+              </ToggleChip>
+              <ToggleChip pressed={!profile.soundOn} onToggle={() => void setSoundOn(false)}>
+                {settingsTexts.sound.off}
+              </ToggleChip>
+            </div>
           </Card>
 
           <Card title={settingsTexts.routines.title}>

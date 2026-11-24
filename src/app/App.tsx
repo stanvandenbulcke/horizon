@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router';
+import { CelebrationLayer } from '@/features/celebrations';
 import { AppRoutes } from './AppRoutes';
 import { useStartup } from './useStartup';
 
@@ -8,6 +9,7 @@ export function App() {
   return (
     <BrowserRouter>
       <AppRoutes />
+      <CelebrationLayer />
     </BrowserRouter>
   );
 }

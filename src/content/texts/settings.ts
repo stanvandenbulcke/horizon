@@ -17,4 +17,10 @@ export const settingsTexts = {
     title: 'Routines',
     button: 'Routines beheren',
   },
+  sound: {
+    title: 'Geluid',
+    hint: 'Plopjes, belletjes en fanfares bij een feestje.',
+    on: '🔊 Aan',
+    off: '🔇 Uit',
+  },
 } as const;

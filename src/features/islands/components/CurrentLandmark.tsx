@@ -1,5 +1,6 @@
 import { addStep, toggleStep } from '@/actions/islands/steps';
 import { islandTexts } from '@/content/texts/islands';
+import { celebrate } from '@/features/celebrations';
 import type { Landmark, Step } from '@/game/model';
 import { Button } from '@/ui/Button';
 import { AddStepForm } from './AddStepForm';
@@ -30,6 +31,11 @@ export function CurrentLandmark({
 }: CurrentLandmarkProps) {
   const allDone = steps.length > 0 && steps.every((step) => step.doneAt !== null);
 
+  const toggle = async (step: Step, button: HTMLElement) => {
+    const result = await toggleStep(step.id);
+    if (result.done) celebrate('small', { from: button });
+  };
+
   return (
     <div className={styles.card}>
       <h3 className={styles.title}>
@@ -40,7 +46,11 @@ export function CurrentLandmark({
         <p className={styles.prompt}>{isFirst ? texts.firstStepPrompt : texts.nextStepsPrompt}</p>
       )}
 
-      <StepList steps={steps} onToggle={(step) => void toggleStep(step.id)} onEdit={onEditStep} />
+      <StepList
+        steps={steps}
+        onToggle={(step, button) => void toggle(step, button)}
+        onEdit={onEditStep}
+      />
 
       <AddStepForm
         placeholder={texts.stepPlaceholder}

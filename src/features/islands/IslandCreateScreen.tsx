@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router';
 import { createIsland } from '@/actions/islands/manageIslands';
+import { celebrationTexts } from '@/content/texts/celebrations';
 import { islandTexts } from '@/content/texts/islands';
 import { navigationTexts } from '@/content/texts/navigation';
+import { celebrate } from '@/features/celebrations';
 import { mapPaths } from '@/features/map';
+import { pickRandom } from '@/lib/random';
 import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
 import { useGoBack } from '@/ui/useGoBack';
@@ -28,6 +31,8 @@ export function IslandCreateScreen() {
           const result = await createIsland(input);
           if (!result.ok) return result.error;
           void navigate(islandsPaths.detail(result.island.id), { replace: true });
+          // Elk nieuw eiland krijgt een wezentje, dat meteen uit zijn ei komt
+          celebrate('medium', { message: pickRandom(celebrationTexts.hatched) });
           return null;
         }}
       />

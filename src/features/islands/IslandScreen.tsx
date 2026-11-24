@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { celebrationTexts } from '@/content/texts/celebrations';
 import { islandTexts } from '@/content/texts/islands';
 import { navigationTexts } from '@/content/texts/navigation';
 import { useIslandDetail } from '@/data/hooks/useIslands';
+import { celebrate } from '@/features/celebrations';
 import { mapPaths } from '@/features/map';
 import { bridgeTotal, liveLandmarks, stepsFor } from '@/game/islands/progress';
 import type { Step } from '@/game/model';
+import { pickRandom } from '@/lib/random';
 import { IconButton } from '@/ui/IconButton';
 import { Notice } from '@/ui/Notice';
 import { Screen } from '@/ui/Screen';
 import { ScreenHeader } from '@/ui/ScreenHeader';
-import { Toast } from '@/ui/Toast';
 import { useGoBack } from '@/ui/useGoBack';
 import { BridgePanel } from './components/BridgePanel';
 import { IslandSummary } from './components/IslandSummary';
@@ -18,8 +20,18 @@ import { PathTrail } from './components/PathTrail';
 import { SideQuestList } from './components/SideQuestList';
 import { SideQuestSteps } from './components/SideQuestSteps';
 import { StepEditSheet } from './components/StepEditSheet';
-import { useCheer } from './hooks/useCheer';
 import { islandsPaths } from './paths';
+
+/** Een eiland af = vuurwerk; een bezienswaardigheid of pijler = een flink feest. */
+function celebrateProgress(islandCompleted: boolean, milestone: 'landmark' | 'pillar' | null) {
+  if (islandCompleted) {
+    celebrate('big', { message: pickRandom(celebrationTexts.island) });
+  } else if (milestone) {
+    celebrate('medium', { message: pickRandom(celebrationTexts[milestone]) });
+  } else {
+    celebrate('small');
+  }
+}
 
 /** Het scherm van één eiland: hoe ver je staat, je stappen, en de side quests ernaast. */
 export function IslandScreen() {
@@ -28,8 +40,6 @@ export function IslandScreen() {
   const goBack = useGoBack(mapPaths.root);
   const detail = useIslandDetail(islandId);
   const [editingStep, setEditingStep] = useState<Step | null>(null);
-  const [cheerMessage, cheer] = useCheer();
-  const { cheers } = islandTexts;
 
   if (detail === undefined) return <Screen tone="sky" />;
   if (detail === null) {
@@ -56,7 +66,6 @@ export function IslandScreen() {
 
   return (
     <Screen tone="sky">
-      <Toast message={cheerMessage} />
       <ScreenHeader
         title={`${island.emoji} ${island.name}`}
         onBack={goBack}
@@ -77,24 +86,18 @@ export function IslandScreen() {
           island={island}
           landmarks={landmarks}
           steps={steps}
-          onLogged={(pillars, completed) => {
-            if (completed) cheer(cheers.island);
-            else if (pillars > 0) cheer(cheers.pillar);
-          }}
+          onLogged={(pillars, completed) =>
+            celebrateProgress(completed, pillars > 0 ? 'pillar' : null)
+          }
         />
       ) : isSideQuest ? (
-        <SideQuestSteps
-          island={island}
-          steps={steps}
-          onEditStep={setEditingStep}
-          onToggled={(completed) => completed && cheer(cheers.island)}
-        />
+        <SideQuestSteps island={island} steps={steps} onEditStep={setEditingStep} />
       ) : (
         <PathTrail
           landmarks={landmarks}
           steps={steps}
           onEditStep={setEditingStep}
-          onReached={(completed) => cheer(completed ? cheers.island : cheers.landmark)}
+          onReached={(completed) => celebrateProgress(completed, 'landmark')}
         />
       )}
 

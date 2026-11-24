@@ -56,6 +56,12 @@ export async function setDailyGoal(
   return dailyGoal;
 }
 
+/** Zet het geluid aan of uit. */
+export async function setSoundOn(soundOn: boolean, now: number = Date.now()): Promise<void> {
+  const profile = await requireProfile();
+  await profileRepository.put({ ...profile, soundOn, updatedAt: now });
+}
+
 /** Geeft je reisgezel een nieuwe naam. Een lege naam wordt genegeerd. */
 export async function renameCompanion(name: string, now: number = Date.now()): Promise<boolean> {
   const trimmed = name.trim().slice(0, config.companion.maxNameLength);

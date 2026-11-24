@@ -6,7 +6,8 @@ import styles from './StepList.module.css';
 
 interface StepListProps {
   steps: readonly Step[];
-  onToggle: (step: Step) => void;
+  /** Krijgt ook de knop mee, zodat het feestje vanaf de juiste plek kan spatten */
+  onToggle: (step: Step, button: HTMLElement) => void;
   onEdit: (step: Step) => void;
 }
 
@@ -26,7 +27,7 @@ export function StepList({ steps, onToggle, onEdit }: StepListProps) {
               className={styles.toggle}
               aria-pressed={done}
               aria-label={texts.toggleLabel(step.title)}
-              onClick={() => onToggle(step)}
+              onClick={(event) => onToggle(step, event.currentTarget)}
             >
               <span className={styles.check} aria-hidden="true">
                 {done ? '✓' : ''}
