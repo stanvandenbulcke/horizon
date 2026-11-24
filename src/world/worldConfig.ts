@@ -37,6 +37,11 @@ export const worldConfig = {
     /** Hoogte van het gras boven het water */
     landHeight: 0.65,
   },
+  bridge: {
+    /** Hoe lang de brug is, van de steiger tot het eiland */
+    length: 4.6,
+    planks: 12,
+  },
   fog: {
     /** Maximaal aantal wolkjes boven een groot eiland */
     puffsPerIsland: 14,

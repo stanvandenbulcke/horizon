@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { BridgeSpan } from '@/world/decor/BridgeSpan';
 import { Flag } from '@/world/decor/Flag';
 import { Lighthouse } from '@/world/decor/Lighthouse';
 import { PalmTree } from '@/world/decor/PalmTree';
@@ -33,6 +34,10 @@ export function GoalIsland({ island, onSelect }: GoalIslandProps) {
     [island.id, radius, puffCount],
   );
 
+  // Een brug komt aan de kant van je thuiseiland en groeit naar het eiland toe
+  const toHome = Math.atan2(-island.position.z, -island.position.x);
+  const bridgeStart = radius + worldConfig.bridge.length + 0.2;
+
   return (
     <group position={[island.position.x, 0, island.position.z]}>
       <group onClick={onTap(() => onSelect(island.id))}>
@@ -47,6 +52,15 @@ export function GoalIsland({ island, onSelect }: GoalIslandProps) {
           <Rocks position={[0.4, 0, -1.2]} scale={0.6} />
         </group>
       </group>
+      {island.type === 'bridge' && (
+        <BridgeSpan
+          progress={island.progress}
+          color={island.color}
+          position={[Math.cos(toHome) * bridgeStart, 0, Math.sin(toHome) * bridgeStart]}
+          // De brug wijst van de steiger naar het eiland (weg van je thuiseiland)
+          rotationY={-(toHome + Math.PI)}
+        />
+      )}
       <Clouds puffs={puffs} />
     </group>
   );

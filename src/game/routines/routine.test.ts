@@ -1,12 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ALL_WEEKDAYS, type Routine } from '@/game/model';
-import {
-  isScheduledOn,
-  moveInOrder,
-  nextOrder,
-  routinesForDay,
-  validateRoutineInput,
-} from './routine';
+import { isScheduledOn, routinesForDay, validateRoutineInput } from './routine';
 
 function routine(id: string, order: number, overrides: Partial<Routine> = {}): Routine {
   return {
@@ -79,33 +73,5 @@ describe('welke routines staan vandaag gepland', () => {
   it('houdt de zelfgekozen volgorde aan', () => {
     const list = [routine('c', 2), routine('a', 0), routine('b', 1)];
     expect(routinesForDay(list, monday).map((r) => r.id)).toEqual(['a', 'b', 'c']);
-  });
-});
-
-describe('volgorde aanpassen', () => {
-  const list = [routine('a', 0), routine('b', 1), routine('c', 2)];
-
-  it('zet een nieuwe routine onderaan', () => {
-    expect(nextOrder(list)).toBe(3);
-    expect(nextOrder([])).toBe(0);
-  });
-
-  it('schuift een routine omhoog', () => {
-    expect(moveInOrder(list, 'b', -1)).toEqual([
-      { id: 'b', order: 0 },
-      { id: 'a', order: 1 },
-    ]);
-  });
-
-  it('schuift een routine omlaag', () => {
-    expect(moveInOrder(list, 'b', 1)).toEqual([
-      { id: 'c', order: 1 },
-      { id: 'b', order: 2 },
-    ]);
-  });
-
-  it('doet niets aan de rand van de lijst', () => {
-    expect(moveInOrder(list, 'a', -1)).toEqual([]);
-    expect(moveInOrder(list, 'c', 1)).toEqual([]);
   });
 });

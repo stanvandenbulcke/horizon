@@ -12,4 +12,15 @@
   left: calc(var(--safe-left) + var(--space-4));
   max-width: var(--content-max);
   margin: 0 auto;
+  /* Alleen de knoppen vangen tikken op; daarnaast kan je gewoon over de kaart schuiven */
+  pointer-events: none;
+}
+
+.overlay > * {
+  pointer-events: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
 }

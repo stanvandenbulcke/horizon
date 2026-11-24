@@ -2,9 +2,8 @@ import { db } from '@/data/db';
 import { markDeleted, newRecordFields } from '@/data/records';
 import { routineRepository } from '@/data/repositories/routineRepository';
 import type { Id, Routine } from '@/game/model';
+import { moveInOrder, nextOrder } from '@/game/ordering';
 import {
-  moveInOrder,
-  nextOrder,
   type RoutineInput,
   type RoutineInputError,
   validateRoutineInput,

@@ -13,6 +13,7 @@ export function toMapIsland(island: Island, progress: number): MapIsland {
     position: island.position,
     sideQuest: island.parentIslandId !== null,
     fog: fogLevel(progress),
+    progress,
     sleeping: false,
     completed: island.status === 'completed',
   };

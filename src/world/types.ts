@@ -14,6 +14,8 @@ export interface MapIsland {
   sideQuest: boolean;
   /** 0 = geen mist meer, 1 = helemaal in de mist */
   fog: number;
+  /** Van 0 tot 1: hoe ver je bent (bij een brug: hoeveel planken er liggen) */
+  progress: number;
   sleeping: boolean;
   completed: boolean;
 }

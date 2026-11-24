@@ -25,6 +25,23 @@ export const config = {
     maxNameLength: 20,
   },
 
+  islands: {
+    maxNameLength: 40,
+    maxStepLength: 60,
+    maxUnitLength: 20,
+    /** Een pad heeft 1 tot 5 bezienswaardigheden */
+    maxLandmarks: 5,
+    /** Een side quest begint met 1 tot 3 stappen */
+    maxSideQuestSteps: 3,
+    /**
+     * Hoeveel van de weg naar een bezienswaardigheid je met stappen alleen aflegt.
+     * Het laatste stukje is het moment waarop je zelf zegt: "bereikt!"
+     */
+    stepCredit: 0.9,
+    /** De pijlers van een brug staan op 25, 50, 75 en 100% van het doel */
+    bridgeThresholds: [0.25, 0.5, 0.75, 1],
+  },
+
   /** Waar eilanden op de kaart komen (in kaarteenheden; je thuiseiland is ±7 breed). */
   map: {
     /** Afstand van het eerste eiland tot je thuiseiland */

@@ -1,5 +1,13 @@
 import Dexie, { type EntityTable } from 'dexie';
-import type { DayLog, Island, Profile, Routine, ShellTransaction } from '@/game/model';
+import type {
+  DayLog,
+  Island,
+  Landmark,
+  Profile,
+  Routine,
+  ShellTransaction,
+  Step,
+} from '@/game/model';
 
 /**
  * De database van Horizon (IndexedDB via Dexie). Alles blijft op je toestel.
@@ -13,6 +21,8 @@ export type HorizonDatabase = Dexie & {
   dayLogs: EntityTable<DayLog, 'id'>;
   shellTransactions: EntityTable<ShellTransaction, 'id'>;
   islands: EntityTable<Island, 'id'>;
+  landmarks: EntityTable<Landmark, 'id'>;
+  steps: EntityTable<Step, 'id'>;
 };
 
 export const db = new Dexie('horizon') as HorizonDatabase;
@@ -28,4 +38,10 @@ db.version(1).stores({
 // Versie 2 (M2): eilanden. Tabellen die niet veranderen, hoeven hier niet opnieuw te staan.
 db.version(2).stores({
   islands: 'id, parentIslandId',
+});
+
+// Versie 3 (M3): bezienswaardigheden en stappen op eilanden.
+db.version(3).stores({
+  landmarks: 'id, islandId',
+  steps: 'id, islandId, landmarkId',
 });

@@ -156,3 +156,39 @@ kaart niets meer tot je haar weer aanraakt. Met "minder beweging" aan op je iPho
 **Keuze:** het kaartscherm (met three.js, ±250 kB gecomprimeerd) is een apart pakket dat pas
 geladen wordt als je de Kaart-tab opent. Het wordt wel meteen bewaard voor offline gebruik.
 **Waarom:** zo start de app snel op het thuisscherm, waar je dagelijkse routines staan.
+
+### D27 – Een bezienswaardigheid bereik je zelf ("Bereikt!") · 2026-11-24
+**Keuze:** stappen vullen de weg naar een bezienswaardigheid voor 90%. Het laatste stukje is
+een tik op "Bereikt!". Zijn al je geplande stappen gedaan, dan vraagt de app of je ze bereikte.
+Een bereikte bezienswaardigheid kan je heropenen (↩).
+**Waarom:** je plant alleen wat je ziet, dus je weet pas onderweg of je genoeg stappen had.
+Jij beslist wanneer je er bent; dat moment verdient een eigen feestje.
+
+### D28 – Een brug = hoeveelheden als stappen, pijlers vanzelf · 2026-11-24
+**Keuze:** bij een brug-eiland voeg je hoeveelheden toe (bv. +€50, met een notitie). Die worden
+bewaard als gedane stappen met een `amount`. De vier pijlers (25/50/75/100%) zijn
+bezienswaardigheden met een `threshold` en worden automatisch bereikt (of weer niet, als je een
+hoeveelheid wist).
+**Waarom:** een getal-doel plan je niet in stappen vooraf, je bouwt het op. Zo blijft het
+datamodel hetzelfde voor pad en brug.
+
+### D29 – Een side quest is een klein eiland met stappen · 2026-11-24
+**Keuze:** een side quest is een `Island` met een `parentIslandId`, zonder bezienswaardigheden.
+Zijn stappen hangen rechtstreeks aan het eiland. Alle stappen gedaan = side quest af.
+**Waarom:** zo werkt alles (kaart, mist, voortgang, bewerken) meteen ook voor side quests.
+
+### D30 – Stappen geven geen schelpen · 2026-11-24
+**Keuze:** schelpen verdien je met routines (en vanaf M5 met buit van je boot). Stappen op
+eilanden geven voortgang, mist die optrekt en (vanaf M4) een feestje.
+**Waarom:** zo blijft het dagdoel over je dagelijkse routines gaan, en voelen eilanden niet als
+een schelpenfabriek.
+
+### D31 – Eilanden herschik je niet in een lijst · 2026-11-24
+**Keuze:** stappen en bezienswaardigheden kan je herschikken (↑↓); eilanden niet. Hun plek op
+de kaart is hun "volgorde".
+**Waarom:** er is geen lijst van eilanden, alleen de kaart. Vrij verslepen op de kaart kan later.
+
+### D32 – Panelen met de ingebouwde `<dialog>` · 2026-11-24
+**Keuze:** het paneel om een stap aan te passen (`ui/Sheet`) gebruikt de `<dialog>` van de
+browser.
+**Waarom:** die regelt focus, de Escape-toets en schermlezers zelf; geen extra bibliotheek nodig.

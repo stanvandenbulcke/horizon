@@ -8,6 +8,16 @@
   font-weight: 700;
 }
 
+/* Onzichtbaar, maar schermlezers lezen het nog voor */
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .input {
   min-height: var(--tap-min);
   padding: 0 var(--space-4);

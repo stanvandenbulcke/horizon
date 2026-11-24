@@ -1,0 +1,28 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.swatch {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--color-outline);
+  border-radius: 50%;
+  box-shadow: 0 3px 0 var(--color-outline);
+  cursor: pointer;
+  transition: transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.swatch:focus-visible {
+  outline: 3px solid var(--color-sun);
+  outline-offset: 2px;
+}
+
+/* De gekozen kleur springt op en krijgt een witte ring */
+.selected {
+  transform: scale(1.12) translateY(-2px);
+  box-shadow:
+    0 0 0 3px var(--color-white),
+    0 0 0 6px var(--color-outline);
+}

@@ -1,11 +1,12 @@
 import { type FormEvent, useState } from 'react';
+import { routineEmojis } from '@/content/defaults/emojis';
 import { routineTexts } from '@/content/texts/routines';
 import { config } from '@/game/config';
 import type { RoutineInput, RoutineInputError } from '@/game/routines/routine';
 import { Button } from '@/ui/Button';
 import { Card } from '@/ui/Card';
+import { EmojiPicker } from '@/ui/EmojiPicker';
 import { TextField } from '@/ui/TextField';
-import { EmojiPicker } from './EmojiPicker';
 import { ShellPicker } from './ShellPicker';
 import { WeekdayPicker } from './WeekdayPicker';
 import styles from './RoutineForm.module.css';
@@ -50,7 +51,7 @@ export function RoutineForm({ initial, onSubmit }: RoutineFormProps) {
       </Card>
 
       <Card title={routineTexts.emojiLabel}>
-        <EmojiPicker value={emoji} onChange={edit(setEmoji)} />
+        <EmojiPicker options={routineEmojis} value={emoji} onChange={edit(setEmoji)} />
       </Card>
 
       <Card title={routineTexts.shellsLabel} hint={routineTexts.shellsHint}>
