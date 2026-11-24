@@ -6,7 +6,7 @@ Dit is het bouwplan van Horizon. De volledige wensenlijst staat in
 [docs/spec/horizon-gigaprompt.md](docs/spec/horizon-gigaprompt.md). Belangrijke keuzes en
 waarom we ze maakten staan in [DECISIONS.md](DECISIONS.md).
 
-**Status:** M0 gebouwd. Wacht op het online zetten (GitHub + Cloudflare) en de test op de iPhone.
+**Status:** M0 gebouwd en online (https://horizon.stanvandenbulck.workers.dev). Wacht op de test op de iPhone.
 
 ---
 

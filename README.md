@@ -5,6 +5,7 @@
 Een doelen-app die aanvoelt als een spel: je leven is een levenskaart vol mist met eilanden.
 Elk doel is een eiland, en met elke stap trekt de mist verder op.
 
+- **Online:** https://horizon.stanvandenbulck.workers.dev (elke push naar `main` komt hier vanzelf)
 - **Plan en mijlpalen:** [PLAN.md](PLAN.md)
 - **Keuzes en waarom:** [DECISIONS.md](DECISIONS.md)
 - **Regels voor Claude:** [CLAUDE.md](CLAUDE.md)
