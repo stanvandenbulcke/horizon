@@ -1,0 +1,22 @@
+# Geïnstalleerde pakketten (worden opnieuw gemaakt met `npm install`)
+node_modules/
+
+# Gebouwde versies van de app (worden opnieuw gemaakt met `npm run build`)
+dist/
+dev-dist/
+*.tsbuildinfo
+
+# Testrapporten
+coverage/
+
+# Geheimen en lokale instellingen: NOOIT op GitHub
+.env
+.env.*
+!.env.example
+*.local
+
+# Rommel van het besturingssysteem en editors
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json

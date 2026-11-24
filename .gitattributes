@@ -1,0 +1,10 @@
+# Alle tekstbestanden met Unix-regeleindes opslaan, zodat Windows en Prettier niet botsen
+* text=auto eol=lf
+
+# Binaire bestanden nooit aanpassen
+*.png binary
+*.ico binary
+*.glb binary
+*.woff2 binary
+*.ogg binary
+*.mp3 binary
