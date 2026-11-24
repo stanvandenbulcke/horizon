@@ -1,0 +1,27 @@
+.button {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-8);
+  border: 3px solid var(--color-outline);
+  border-radius: var(--radius-m);
+  background: linear-gradient(#ffd45c, var(--color-sun-dark));
+  box-shadow: 0 6px 0 var(--color-outline);
+  color: var(--color-ink);
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+}
+
+/* Inzakken bij tikken: de knop zakt in zijn eigen schaduw */
+.button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--color-outline);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-white);
+  outline-offset: 3px;
+}

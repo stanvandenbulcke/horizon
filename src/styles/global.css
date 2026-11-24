@@ -1,0 +1,63 @@
+/* Basisregels voor de hele app */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--color-ink);
+  background: var(--color-sea);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent; /* geen grijze flits bij tikken */
+  touch-action: manipulation; /* geen inzoomen bij dubbeltik */
+  overscroll-behavior: none; /* geen elastiek-effect aan de randen */
+  user-select: none; /* app-gevoel: lang drukken selecteert geen tekst */
+  -webkit-user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-title);
+}
+
+p {
+  margin: 0;
+}
+
+/* Wie minder beweging wil (instelling van de iPhone), krijgt bijna geen animaties */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

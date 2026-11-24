@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4fc3f0"/>
+      <stop offset="1" stop-color="#ffd98a"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1fa4da"/>
+      <stop offset="1" stop-color="#0b5f94"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff1b8"/>
+      <stop offset="0.6" stop-color="#ffc53d"/>
+      <stop offset="1" stop-color="#ff9a2e"/>
+    </radialGradient>
+  </defs>
+
+  <!-- lucht -->
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- mistwolkjes -->
+  <g fill="#ffffff" opacity="0.92">
+    <ellipse cx="112" cy="132" rx="64" ry="26"/>
+    <ellipse cx="150" cy="116" rx="44" ry="30"/>
+    <ellipse cx="402" cy="176" rx="56" ry="22"/>
+    <ellipse cx="372" cy="162" rx="36" ry="24"/>
+  </g>
+
+  <!-- zon op de horizon -->
+  <circle cx="256" cy="320" r="120" fill="url(#sun)"/>
+
+  <!-- eilandje met palmboom -->
+  <path d="M48 324 Q118 268 196 324 Z" fill="#f6cf7a"/>
+  <path d="M122 300 Q128 262 146 232" stroke="#8a5a2b" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <g fill="#3dbe6b">
+    <ellipse cx="124" cy="228" rx="30" ry="11" transform="rotate(20 124 228)"/>
+    <ellipse cx="168" cy="226" rx="30" ry="11" transform="rotate(-20 168 226)"/>
+    <ellipse cx="146" cy="214" rx="11" ry="28"/>
+  </g>
+
+  <!-- zee -->
+  <rect y="320" width="512" height="192" fill="url(#sea)"/>
+
+  <!-- glinstering van de zon op het water -->
+  <g fill="#ffe08a" opacity="0.9">
+    <rect x="182" y="342" width="148" height="13" rx="6.5"/>
+    <rect x="210" y="371" width="92" height="11" rx="5.5"/>
+    <rect x="236" y="396" width="40" height="9" rx="4.5"/>
+  </g>
+
+  <!-- golfjes -->
+  <g stroke="#7fd6f5" stroke-width="12" fill="none" stroke-linecap="round">
+    <path d="M44 446 q30 -18 60 0 t60 0"/>
+    <path d="M340 470 q30 -18 60 0 t60 0"/>
+  </g>
+</svg>

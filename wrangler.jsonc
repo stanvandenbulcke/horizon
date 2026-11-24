@@ -1,0 +1,11 @@
+// Instellingen voor Cloudflare: zo zet Cloudflare de app online.
+// Cloudflare bouwt de app (`npm run build`) en zet daarna de map `dist` online.
+{
+  "name": "horizon",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    // Onbekende adressen tonen gewoon de app (nodig voor schermwissels zoals /instellingen)
+    "not_found_handling": "single-page-application",
+  },
+}

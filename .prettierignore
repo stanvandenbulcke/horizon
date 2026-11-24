@@ -1,0 +1,10 @@
+# Gemaakt door programma's, niet door ons
+node_modules/
+dist/
+dev-dist/
+coverage/
+package-lock.json
+public/icons/
+
+# Uitleg schrijven we met de hand
+*.md

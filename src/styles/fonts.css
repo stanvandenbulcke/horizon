@@ -1,0 +1,21 @@
+/*
+ * De lettertypes zitten in de app zelf, zodat ze offline werken en er niets naar Google gaat.
+ * We laden alleen de Latijnse letters (genoeg voor Nederlands, ook é, ë, ï, …): zo blijft de app klein.
+ */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2')
+    format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url('@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2')
+    format('woff2-variations');
+}

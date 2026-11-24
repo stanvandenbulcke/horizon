@@ -6,7 +6,7 @@ Dit is het bouwplan van Horizon. De volledige wensenlijst staat in
 [docs/spec/horizon-gigaprompt.md](docs/spec/horizon-gigaprompt.md). Belangrijke keuzes en
 waarom we ze maakten staan in [DECISIONS.md](DECISIONS.md).
 
-**Status:** plan klaar, wacht op akkoord van Stan. Er is nog geen code.
+**Status:** M0 gebouwd. Wacht op het online zetten (GitHub + Cloudflare) en de test op de iPhone.
 
 ---
 
@@ -31,7 +31,8 @@ waarom we ze maakten staan in [DECISIONS.md](DECISIONS.md).
 | Lettertypes | **Fredoka** (titels) + **Nunito** (tekst), via Fontsource | Allebei rond en gratis, en we zetten ze in de app zelf zodat ze offline werken. |
 | Tests | **Vitest** (+ fake-indexeddb) | Test de spelregels automatisch, zodat een fix later niets anders kapotmaakt. |
 | Netheid | **ESLint + Prettier** | Prettier zet alle code automatisch in dezelfde vorm, ESLint bewaakt de regels uit §2. |
-| Hosting | **Cloudflare Pages**, gekoppeld aan **GitHub** | Gratis, HTTPS, onbeperkt verkeer, en elke opgeslagen versie komt vanzelf online. |
+| Stijl | **CSS Modules** + CSS-variabelen | Gewone CSS naast elk scherm, met alle kleuren en maten op één plek (`src/styles/tokens.css`). |
+| Hosting | **Cloudflare Workers**, gekoppeld aan **GitHub** | Gratis, HTTPS, onbeperkt verkeer, en elke opgeslagen versie komt vanzelf online (zie D15). |
 | Fase 1b | **Supabase** (gratis plan) + **Cloudflare Worker** met cron | Login, database en meldingen zonder kosten (zie §6 voor de limieten). |
 
 **Waarom niet PixiJS (2D)?** Dan zou je voor elk eiland, elke boom en elk wezentje afbeeldingen
@@ -52,6 +53,7 @@ horizon/
 ├── DECISIONS.md           logboek van alle keuzes
 ├── CREDITS.md             bronnen en licenties van gratis assets
 ├── README.md              hoe start je het project op je pc
+├── (instellingen)         package.json, vite.config.ts, eslint.config.js, wrangler.jsonc, …
 ├── docs/                  uitleg in gewone taal
 │   ├── spec/              de originele gigaprompt
 │   └── guides/            stap-voor-stap-gidsen (hosting, iPhone, Supabase, widget)
@@ -199,7 +201,7 @@ mijlpaal krijgt een label (bv. `m1`), zodat je altijd terug kan.
 - Jij: Node.js en Git installeren, een GitHub-account maken (ik geef de stappen).
 - Ik: project opzetten (Vite, React, TypeScript, ESLint, Prettier, Vitest), de mappenstructuur
   met een README per map, PWA-instellingen, iconen, lettertypes en een "Hallo Horizon"-scherm.
-- Samen: GitHub-repository (privé) + Cloudflare Pages koppelen, met een gids in `docs/guides/`.
+- Samen: GitHub-repository (privé) + Cloudflare koppelen, met een gids in `docs/guides/`.
 - **Klaar als:** je de link op je iPhone opent, op je beginscherm zet, en de app schermvullend
   opent met eigen icoon, ook in vliegtuigmodus.
 
@@ -284,8 +286,9 @@ Ik kopieer alleen de modellen die we echt gebruiken, zodat de app klein blijft.
 
 **GitHub (gratis):** onbeperkt privé-repositories. Dient ook als backup van de code.
 
-**Cloudflare Pages (gratis):** onbeperkt verkeer, 500 builds per maand (een build = één keer
-de app online zetten; ruim genoeg), maximaal 25 MiB per bestand.
+**Cloudflare Workers (gratis):** het tonen van de app (statische bestanden) is gratis en
+onbeperkt. Het bouwen na elke wijziging valt binnen de gratis bouwminuten (één bouw duurt
+ongeveer een minuut). In fase 1b draait de meldingstaak op dezelfde plek.
 
 **Supabase (gratis plan, fase 1b)** – nagekeken in november 2026, ik controleer opnieuw bij M15:
 

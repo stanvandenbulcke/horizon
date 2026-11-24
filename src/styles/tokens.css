@@ -1,0 +1,41 @@
+/* Alle kleuren, lettertypes en maten van Horizon op één plek */
+:root {
+  /* Kleuren */
+  --color-sky-top: #4fc3f0;
+  --color-sky-bottom: #ffd98a;
+  --color-sea: #1a8fc4;
+  --color-sea-deep: #0b5f94;
+  --color-sun-light: #fff1b8;
+  --color-sun: #ffc53d;
+  --color-sun-dark: #e8921c;
+  --color-sand: #f6cf7a;
+  --color-ink: #12324a; /* donkere tekst */
+  --color-outline: #0d3550; /* dikke randen in Clash-stijl */
+  --color-white: #ffffff;
+
+  /* Lettertypes */
+  --font-title: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+
+  /* Afstanden */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Afrondingen */
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-l: 32px;
+
+  /* Minimale hoogte van iets waarop je tikt: makkelijk met je duim */
+  --tap-min: 56px;
+
+  /* Safe areas: de ruimte rond de notch en de balk onderaan je iPhone */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}

@@ -83,3 +83,29 @@ tot de online sync van fase 1b er is.
 een klein verzoek naar Supabase stuurt.
 **Waarom:** een gratis Supabase-project pauzeert na 1 week zonder activiteit; dan zouden widget
 en meldingen stoppen. Wordt opnieuw bekeken bij M15/M16.
+
+### D15 – Hosting op Cloudflare Workers in plaats van Pages (vervangt D4) · 2026-11-24
+**Keuze:** de app staat op Cloudflare Workers (met "static assets"), gekoppeld aan GitHub.
+De instellingen staan in `wrangler.jsonc`.
+**Waarom:** Cloudflare raadt Workers nu aan voor nieuwe projecten en voegt daar nieuwe functies
+toe. Het tonen van de app blijft gratis en onbeperkt. En in fase 1b hebben we toch een Worker
+nodig voor de meldingen, dus alles staat op één plek.
+**Wat blijft hetzelfde als D4:** gratis, HTTPS, GitHub als backup, automatisch online na elke push.
+
+### D16 – Stijl met CSS Modules en CSS-variabelen · 2026-11-24
+**Keuze:** elk scherm of blokje heeft zijn eigen `.module.css`-bestand ernaast. Kleuren,
+lettertypes en maten staan als variabelen in `src/styles/tokens.css`.
+**Waarom:** gewone CSS is het makkelijkst te lezen, de stijl staat naast de code die hem
+gebruikt, en stijlen van verschillende schermen kunnen niet botsen. Geen extra bibliotheek nodig.
+**Alternatief bekeken:** Tailwind. Snel om mee te werken, maar lange rijen klassenamen zijn
+moeilijk te lezen voor een beginner.
+
+### D17 – Nieuwe versies automatisch laden bij het openen · 2026-11-24
+**Keuze:** telkens je de app opent (of terughaalt naar de voorgrond), kijkt ze of er een nieuwe
+versie online staat, en laadt die meteen.
+**Waarom:** zo hoef je nooit zelf iets te doen om de nieuwste versie te krijgen. Omdat dit alleen
+bij het openen gebeurt, word je niet onderbroken terwijl je iets invult.
+
+### D18 – Git-naam zonder echt e-mailadres · 2026-11-24
+**Keuze:** commits staan op naam van "Stan <stan@horizon.local>" (alleen in dit project).
+**Waarom:** zo komt je echte e-mailadres niet op GitHub.

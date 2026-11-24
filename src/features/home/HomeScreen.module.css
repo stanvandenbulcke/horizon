@@ -1,0 +1,113 @@
+/* Hoe hoog de horizon op het scherm ligt */
+.screen {
+  --horizon: 58%;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  height: 100%;
+  overflow: hidden;
+  padding: calc(var(--safe-top) + var(--space-8)) calc(var(--safe-right) + var(--space-6))
+    calc(var(--safe-bottom) + var(--space-8)) calc(var(--safe-left) + var(--space-6));
+  background: linear-gradient(var(--color-sky-top), var(--color-sky-bottom) var(--horizon));
+  text-align: center;
+}
+
+/* De zon die op de horizon ligt, en zachtjes "ademt" */
+.sun {
+  position: absolute;
+  top: var(--horizon);
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--color-sun-light) 0%,
+    var(--color-sun) 55%,
+    var(--color-sun-dark) 100%
+  );
+  transform: translate(-50%, -50%);
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.sea {
+  position: absolute;
+  inset: var(--horizon) 0 0 0;
+  background: linear-gradient(var(--color-sea), var(--color-sea-deep));
+}
+
+/* Alles hierboven ligt achter de tekst en de knop */
+.header,
+.bubble,
+.footer {
+  position: relative;
+}
+
+.title {
+  color: var(--color-white);
+  font-size: clamp(56px, 18vw, 88px);
+  font-weight: 700;
+  line-height: 1;
+  -webkit-text-stroke: 3px var(--color-outline);
+  paint-order: stroke fill;
+  text-shadow: 0 6px 0 var(--color-outline);
+}
+
+.tagline {
+  margin-top: var(--space-3);
+  color: var(--color-outline);
+  font-weight: 700;
+}
+
+/* Tekstballon met een pirate groet, die bij elke nieuwe groet even stuitert */
+.bubble {
+  max-width: 320px;
+  padding: var(--space-4) var(--space-6);
+  border: 3px solid var(--color-outline);
+  border-radius: var(--radius-l);
+  background: var(--color-white);
+  box-shadow: 0 6px 0 var(--color-outline);
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 600;
+  text-wrap: balance;
+  animation: pop 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* De knop staat altijd onderaan, in de zee */
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.note {
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.85);
+  }
+  to {
+    transform: scale(1);
+  }
+}
